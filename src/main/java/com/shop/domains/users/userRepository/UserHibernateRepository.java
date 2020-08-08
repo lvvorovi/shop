@@ -1,3 +1,4 @@
+/*
 package com.shop.domains.users.userRepository;
 
 import com.shop.domains.users.UserEntity;
@@ -69,3 +70,4 @@ public class UserHibernateRepository {
                 .add(Restrictions.eq("email", email).ignoreCase()).uniqueResult();
     }
 }
+*/

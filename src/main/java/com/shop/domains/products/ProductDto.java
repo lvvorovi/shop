@@ -14,6 +14,7 @@ public class ProductDto {
     private String category;
     private BigDecimal actualPrice;
 
+
     public ProductDto() {
     }
 

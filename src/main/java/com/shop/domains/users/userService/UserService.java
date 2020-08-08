@@ -1,3 +1,4 @@
+/*
 package com.shop.domains.users.userService;
 
 import com.shop.domains.users.UserEntity;
@@ -60,3 +61,4 @@ public class UserService {
     }
 
 }
+*/

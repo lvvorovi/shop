@@ -1,4 +1,4 @@
-package com.shop.domains.products.productMappers;
+package com.shop.domains.products;
 
 import com.shop.domains.products.ProductDto;
 import com.shop.domains.products.ProductEntity;

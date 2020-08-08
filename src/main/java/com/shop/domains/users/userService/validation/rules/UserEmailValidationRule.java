@@ -1,3 +1,4 @@
+/*
 package com.shop.domains.users.userService.validation.rules;
 
 import com.shop.domains.users.UserEntity;
@@ -42,3 +43,4 @@ public class UserEmailValidationRule implements UserValidationRules {
         }
     }
 }
+*/
