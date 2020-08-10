@@ -1,7 +1,7 @@
 package com.shop.domains.users.userMappers;
 
-import com.shop.domains.users.UserEntity;
 import com.shop.domains.users.UserDto;
+import com.shop.domains.users.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component

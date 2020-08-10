@@ -1,9 +1,5 @@
 package com.shop.domains.users;
 
-import com.shop.domains.products.ProductEntity;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class UserDto {

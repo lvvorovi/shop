@@ -31,7 +31,7 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
-//    @Field
+    //    @Field
     @Column(name = "sku")
     private String sku;
 

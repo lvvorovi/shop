@@ -1,9 +1,7 @@
 package com.shop.domains.products.productService.validation.rules;
 
-import com.shop.domains.products.ProductEntity;
 import com.shop.domains.products.ProductDto;
 import com.shop.domains.products.ProductRepositoryJpa;
-import com.shop.domains.products.productService.validation.exceptions.NameAlreadyExistsException;
 import com.shop.domains.products.productService.validation.exceptions.NameIllegalException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
