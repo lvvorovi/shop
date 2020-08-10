@@ -38,7 +38,7 @@ public class ProductController {
     }
 
     @PostMapping("/bulk/{jsonList}")
-    public void saveAll(@PathVariable String jsonList) throws IOException {
+    public void saveAll(@PathVariable String jsonList) {
         ArrayList<ProductDto> dtoList = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
         JSONArray jsonArray = new JSONArray("[" + jsonList + "]");
