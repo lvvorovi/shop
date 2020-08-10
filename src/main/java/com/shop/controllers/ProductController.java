@@ -31,13 +31,13 @@ public class ProductController {
         return productService.findById(Long.parseLong(id));
     }
 
-    @PostMapping("/{dtoJson}")
+    @PostMapping("/save/{dtoJson}")
     public void save(@PathVariable String dtoJson) throws IOException {
         ProductDto dto = new ObjectMapper().readValue(dtoJson, ProductDto.class);
         productService.save(dto);
     }
 
-    @PostMapping("/bulk/{jsonList}")
+    @PostMapping("/save/bulk/{jsonList}")
     public void saveAll(@PathVariable String jsonList) {
         ArrayList<ProductDto> dtoList = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -51,6 +51,4 @@ public class ProductController {
         });
         productService.saveAll(dtoList);
     }
-
-
 }
