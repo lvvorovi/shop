@@ -19,7 +19,6 @@ public class ProductEntity {
     private Long id;
 
     @Column(name = "name", nullable = false, unique = true)
-//    @Field
     private String name;
 
     @Column(name = "price", nullable = false)
@@ -31,7 +30,6 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
-    //    @Field
     @Column(name = "sku")
     private String sku;
 
