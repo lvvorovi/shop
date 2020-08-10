@@ -1,14 +1,11 @@
 package com.shop.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.domains.products.ProductDto;
 import com.shop.domains.products.productService.ProductService;
-import org.json.JSONArray;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -31,24 +28,14 @@ public class ProductController {
         return productService.findById(Long.parseLong(id));
     }
 
-    @PostMapping("/save/{dtoJson}")
-    public void save(@PathVariable String dtoJson) throws IOException {
-        ProductDto dto = new ObjectMapper().readValue(dtoJson, ProductDto.class);
+    @PostMapping
+    public void save(@RequestBody ProductDto dto) {
         productService.save(dto);
     }
 
-    @PostMapping("/save/bulk/{jsonList}")
-    public void saveAll(@PathVariable String jsonList) {
-        ArrayList<ProductDto> dtoList = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
-        JSONArray jsonArray = new JSONArray("[" + jsonList + "]");
-        jsonArray.forEach(json -> {
-            try {
-                dtoList.add(objectMapper.readValue(json.toString(), ProductDto.class));
-            } catch (JsonProcessingException e) {
-                e.getMessage();
-            }
-        });
-        productService.saveAll(dtoList);
+    @PostMapping("/bulk")
+    public void saveAll(@RequestBody List<ProductDto> dtoList) {
+        System.out.println(dtoList);
+        productService.saveAll((ArrayList<ProductDto>) dtoList);
     }
 }
