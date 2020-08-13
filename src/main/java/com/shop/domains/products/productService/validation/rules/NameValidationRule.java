@@ -29,11 +29,5 @@ public class NameValidationRule implements ProductValidationRule {
         if (dto.getName().length() < 3 || dto.getName().length() > 32) {
             throw new NameIllegalException("Name should be 3-32 characters long");
         }
-/*        ArrayList<ProductEntity> entityList = (ArrayList)productRepository.findAll();
-        ProductEntity entity = new ProductEntity();
-
-        if (entity != null && !entity.getId().equals(dto.getId())) {
-            throw new NameAlreadyExistsException("Name already exists");
-        }*/
     }
 }

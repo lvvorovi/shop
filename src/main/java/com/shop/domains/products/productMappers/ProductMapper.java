@@ -1,5 +1,7 @@
-package com.shop.domains.products;
+package com.shop.domains.products.productMappers;
 
+import com.shop.domains.products.ProductDto;
+import com.shop.domains.products.ProductEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

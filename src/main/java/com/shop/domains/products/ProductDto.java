@@ -1,19 +1,28 @@
 package com.shop.domains.products;
 
+import org.springframework.hateoas.RepresentationModel;
+
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ProductDto {
+public class ProductDto extends RepresentationModel<ProductDto> {
 
+    @Null
     private Long id;
+    @NotNull
+    @Size(min = 2, max = 32)
     private String name;
+    @NotNull
+    @DecimalMin("0")
     private BigDecimal price;
     private String description;
+    @Size(max = 10)
     private String sku;
+    @DecimalMin("0")
     private BigDecimal discount;
     private String category;
     private BigDecimal actualPrice;
-
 
     public ProductDto() {
     }
