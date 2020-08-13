@@ -14,8 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
-@Controller
 //@RestController
+@Controller
 @RequestMapping("/products")
 public class ProductController implements WebMvcConfigurer {
 
@@ -83,3 +83,5 @@ public class ProductController implements WebMvcConfigurer {
 
 
 }
+
+
