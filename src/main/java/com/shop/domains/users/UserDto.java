@@ -25,9 +25,7 @@ public class UserDto extends RepresentationModel<UserDto> {
     private String password;
     @Pattern(regexp = "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*$")
     private String phone;
-    @Column(name = "created")
     private Timestamp created;
-    @Column(name = "updated")
     private Timestamp updated;
 
     public UserDto() {
