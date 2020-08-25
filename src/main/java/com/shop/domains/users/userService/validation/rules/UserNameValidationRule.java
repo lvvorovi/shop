@@ -13,10 +13,10 @@ public class UserNameValidationRule implements UserValidationRules {
     public void validate(UserDto dto) {
         notNull(dto);
 
-        if (dto.getName() == null) {
+        if (dto.getFirstName() == null) {
             throw new UserNameException("Name should be not null");
         }
-        if (dto.getName().length() > 25 || dto.getName().length() < 2) {
+        if (dto.getFirstName().length() > 25 || dto.getFirstName().length() < 2) {
             throw new UserNameException("Name should be between 2 and 25 characters");
         }
     }

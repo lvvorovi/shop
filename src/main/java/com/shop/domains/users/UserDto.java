@@ -1,15 +1,34 @@
 package com.shop.domains.users;
 
+import org.springframework.hateoas.RepresentationModel;
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.Objects;
 
-public class UserDto {
+public class UserDto extends RepresentationModel<UserDto> {
 
     private Long id;
-    private String name;
+    @NotNull
+    @Size(min = 2, max = 20)
+    private String firstName;
+    @NotNull
+    @Size(min = 2, max = 20)
+    private String lastName;
+    @NotNull
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
     private String email;
+    @NotNull
     private String password;
+    @Pattern(regexp = "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*$")
     private String phone;
-//    private List<ProductEntity> productEntityList = new ArrayList<>();
+    @Column(name = "created")
+    private Timestamp created;
+    @Column(name = "updated")
+    private Timestamp updated;
 
     public UserDto() {
     }
@@ -22,12 +41,20 @@ public class UserDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -54,38 +81,54 @@ public class UserDto {
         this.phone = phone;
     }
 
-//    public List<ProductEntity> getProductEntityList() {
-//        return productEntityList;
-//    }
+    public Timestamp getCreated() {
+        return created;
+    }
 
-//    public void setProductEntityList(List<ProductEntity> productEntityList) {
-//        this.productEntityList = productEntityList;
-//    }
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+
+    public Timestamp getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Timestamp updated) {
+        this.updated = updated;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         UserDto userDto = (UserDto) o;
         return Objects.equals(id, userDto.id) &&
-                Objects.equals(name, userDto.name) &&
+                Objects.equals(firstName, userDto.firstName) &&
+                Objects.equals(lastName, userDto.lastName) &&
                 Objects.equals(email, userDto.email) &&
                 Objects.equals(password, userDto.password) &&
-                Objects.equals(phone, userDto.phone);
+                Objects.equals(phone, userDto.phone) &&
+                Objects.equals(created, userDto.created) &&
+                Objects.equals(updated, userDto.updated);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, phone);
+        return Objects.hash(super.hashCode(), id, firstName, lastName, email, password, phone, created, updated);
     }
 
     @Override
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
+                ", created='" + created + '\'' +
+                ", updated='" + updated + '\'' +
                 '}';
     }
 }

@@ -18,6 +18,9 @@ public class ProductPageMapper {
         return entityPage.map(productMapper::toDto);
     }
 
+    public Page<ProductEntity> toEntityPage(Page<ProductDto> dtoPage) {
+        return dtoPage.map(productMapper::toEntity);
+    }
 
 
 

@@ -18,6 +18,9 @@ public class ProductMapper {
         dto.setDiscount(entity.getDiscount());
         dto.setSku(entity.getSku());
         dto.setDescription(entity.getDescription());
+        dto.setUpdated(entity.getUpdated());
+        dto.setCreated(entity.getCreated());
+        dto.setCategory(entity.getCategory());
 
         if (dto.getDiscount().compareTo(new BigDecimal(0)) > 0) {
             dto.setActualPrice(toActualPrice(entity.getPrice(), entity.getDiscount()));
@@ -35,6 +38,10 @@ public class ProductMapper {
         entity.setDiscount(dto.getDiscount());
         entity.setSku(dto.getSku());
         entity.setDescription(dto.getDescription());
+        entity.setCategory(dto.getCategory());
+        entity.setCreated(dto.getCreated());
+        entity.setUpdated(dto.getUpdated());
+
         return entity;
     }
 

@@ -14,27 +14,16 @@ import java.util.Set;
 public class ProductEntity {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "name", nullable = false, unique = true)
     private String name;
-
-    @Column(name = "price", nullable = false)
     private BigDecimal price;
-
-    @Column(name = "discount")
     private BigDecimal discount;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "sku")
     private String sku;
-
-    @Column(name = "created")
-    private Timestamp timestamp;
+    private Timestamp created;
+    private Timestamp updated;
+    private String category;
 
     @OneToMany(mappedBy = "product")
     private Set<UserItemEntity> items;
@@ -90,12 +79,28 @@ public class ProductEntity {
         this.sku = sku;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Timestamp getCreated() {
+        return created;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+
+    public Timestamp getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Timestamp updated) {
+        this.updated = updated;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Set<UserItemEntity> getItems() {
@@ -111,15 +116,21 @@ public class ProductEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity entity = (ProductEntity) o;
-        return Objects.equals(name, entity.name) &&
+        return Objects.equals(id, entity.id) &&
+                Objects.equals(name, entity.name) &&
                 Objects.equals(price, entity.price) &&
                 Objects.equals(discount, entity.discount) &&
-                Objects.equals(description, entity.description);
+                Objects.equals(description, entity.description) &&
+                Objects.equals(sku, entity.sku) &&
+                Objects.equals(created, entity.created) &&
+                Objects.equals(updated, entity.updated) &&
+                Objects.equals(category, entity.category) &&
+                Objects.equals(items, entity.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, discount, description, sku, timestamp);
+        return Objects.hash(id, name, price, discount, description, sku, created, updated, category, items);
     }
 
     @Override
@@ -131,7 +142,9 @@ public class ProductEntity {
                 ", discount=" + discount +
                 ", description='" + description + '\'' +
                 ", sku='" + sku + '\'' +
-                ", timestamp=" + timestamp +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", category='" + category + '\'' +
                 '}';
     }
 }
