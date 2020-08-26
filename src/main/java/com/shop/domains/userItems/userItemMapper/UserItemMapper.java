@@ -1,12 +1,12 @@
 package com.shop.domains.userItems.userItemMapper;
 
-import com.shop.domains.userItems.UserItemEntity;
-import com.shop.domains.userItems.UserItemDto;
-import com.shop.domains.products.ProductEntity;
 import com.shop.domains.products.ProductDto;
+import com.shop.domains.products.ProductEntity;
 import com.shop.domains.products.productMappers.ProductMapper;
-import com.shop.domains.users.UserEntity;
+import com.shop.domains.userItems.UserItemDto;
+import com.shop.domains.userItems.UserItemEntity;
 import com.shop.domains.users.UserDto;
+import com.shop.domains.users.UserEntity;
 import com.shop.domains.users.userMappers.UserMapper;
 import org.springframework.stereotype.Service;
 

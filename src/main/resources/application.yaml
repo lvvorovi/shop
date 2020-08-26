@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/shoppinglist
+    username: root
+    password: root
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate
+
+  data:
+    rest:
+      default-media-type: application/json

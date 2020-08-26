@@ -1,9 +1,9 @@
-/*
 package com.shop.domains.beanMappers;
 
-import com.javaguru.shoppinglist.domains.userItems.userItemMapper.UserItemMapper;
-import com.javaguru.shoppinglist.domains.products.productMappers.ProductMapper;
-import com.javaguru.shoppinglist.domains.users.userMappers.UserMapper;
+
+import com.shop.domains.products.productMappers.ProductMapper;
+import com.shop.domains.userItems.userItemMapper.UserItemMapper;
+import com.shop.domains.users.userMappers.UserMapper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,4 +32,3 @@ public class BeanMapperService {
     }
 
 }
-*/

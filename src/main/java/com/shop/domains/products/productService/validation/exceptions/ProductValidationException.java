@@ -1,6 +1,6 @@
 package com.shop.domains.products.productService.validation.exceptions;
 
-import com.shop.domains.ValidationException;
+import com.shop.core.exceptions.ValidationException;
 
 public class ProductValidationException extends ValidationException {
 

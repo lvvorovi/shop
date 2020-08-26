@@ -1,8 +1,8 @@
 package com.shop.domains.users.userService.validation.rules;
 
-import com.shop.domains.users.UserEntity;
 import com.shop.domains.users.UserDto;
-import com.shop.domains.users.userRepository.UserHibernateRepository;
+import com.shop.domains.users.UserEntity;
+import com.shop.domains.users.UserRepository;
 import com.shop.domains.users.userService.validation.exceptions.UserEmailException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @Order(100)
 public class UserEmailValidationRule implements UserValidationRules {
 
-    private final UserHibernateRepository userRepository;
+    private final UserRepository userRepository;
 
-    public UserEmailValidationRule(UserHibernateRepository userRepository) {
+    public UserEmailValidationRule(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -36,8 +36,8 @@ public class UserEmailValidationRule implements UserValidationRules {
         if (dto.getEmail().startsWith("@")) {
             throw new UserEmailException("Illegal email format. Missing email username before '@' symbol");
         }
-        UserEntity entity = userRepository.findByEmail(dto.getEmail());
-        if (entity != null && !entity.getId().equals(dto.getId())) {
+        UserEntity entity = userRepository.findByEmail(dto.getEmail()).orElseGet(UserEntity::new);
+        if (entity.getId() != null && !entity.getEmail().equals(dto.getEmail())) {
             throw new UserEmailException("email already used by another user");
         }
     }

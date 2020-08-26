@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<body>
+<form action="#" th:action="@{/products/form}" th:object="${productDto}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" /></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+        </tr>
+
+        <tr>
+            <td>Price:</td>
+            <td><input type="number" th:field="*{price}" /></td>
+            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</td>
+        </tr>
+
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}" /></td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
+        </tr>
+
+        <tr>
+            <td>SKU:</td>
+            <td><input type="text" th:field="*{sku}" /></td>
+            <td th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}">SKU Error</td>
+        </tr>
+
+        <tr>
+            <td>Discount:</td>
+            <td><input type="number" th:field="*{discount}" /></td>
+            <td th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}">Discount Error</td>
+        </tr>
+
+        <tr>
+            <td>Category:</td>
+            <td><input type="category" th:field="*{category}" /></td>
+            <td th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</td>
+        </tr>
+
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+
+</form>
+
+</body>
+
+</html>

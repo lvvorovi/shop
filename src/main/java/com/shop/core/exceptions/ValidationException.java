@@ -1,4 +1,4 @@
-package com.shop.domains;
+package com.shop.core.exceptions;
 
 public class ValidationException extends RuntimeException {
 

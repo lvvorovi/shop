@@ -3,6 +3,7 @@ package com.shop.domains.users;
 import com.shop.domains.userItems.UserItemEntity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,20 +16,26 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-//    @Field
-    private String name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Column(name = "email", nullable = false, unique = true)
-//    @Field
     private String email;
 
     @Column(name = "password", nullable = false, unique = true)
-//    @Field
     private String password;
 
     @Column(name = "phone")
     private String phone;
+
+    @Column(name = "created")
+    private Timestamp created;
+
+    @Column(name = "updated")
+    private Timestamp updated;
 
     @OneToMany(mappedBy = "user")
     private Set<UserItemEntity> items;
@@ -44,12 +51,20 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -76,6 +91,22 @@ public class UserEntity {
         this.phone = phone;
     }
 
+    public Timestamp getCreated() {
+        return created;
+    }
+
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+
+    public Timestamp getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Timestamp updated) {
+        this.updated = updated;
+    }
+
     public Set<UserItemEntity> getItems() {
         return items;
     }
@@ -90,25 +121,31 @@ public class UserEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(password, that.password) &&
-                Objects.equals(phone, that.phone);
+                Objects.equals(phone, that.phone) &&
+                Objects.equals(created, that.created) &&
+                Objects.equals(updated, that.updated);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, phone);
+        return Objects.hash(id, firstName, lastName, email, password, phone, created, updated);
     }
 
     @Override
     public String toString() {
         return "UserEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
+                ", created='" + created + '\'' +
+                ", updated='" + updated + '\'' +
                 '}';
     }
 }
