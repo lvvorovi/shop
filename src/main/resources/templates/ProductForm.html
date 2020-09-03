@@ -2,46 +2,48 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <body>
-<form action="#" th:action="@{/products/form}" th:object="${productDto}" method="post">
+<form action="#" method="post" th:action="@{/products/form}" th:object="${productDto}">
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" th:field="*{name}" /></td>
-            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            <td><input th:field="*{name}" type="text"/></td>
+            <td th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Name Error</td>
         </tr>
 
         <tr>
             <td>Price:</td>
-            <td><input type="number" th:field="*{price}" /></td>
-            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</td>
+            <td><input th:field="*{price}" type="number"/></td>
+            <td th:errors="*{price}" th:if="${#fields.hasErrors('price')}">Price Error</td>
         </tr>
 
         <tr>
             <td>Description:</td>
-            <td><input type="text" th:field="*{description}" /></td>
-            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
+            <td><input th:field="*{description}" type="text"/></td>
+            <td th:errors="*{description}" th:if="${#fields.hasErrors('description')}">Description Error</td>
         </tr>
 
         <tr>
             <td>SKU:</td>
-            <td><input type="text" th:field="*{sku}" /></td>
-            <td th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}">SKU Error</td>
+            <td><input th:field="*{sku}" type="text"/></td>
+            <td th:errors="*{sku}" th:if="${#fields.hasErrors('sku')}">SKU Error</td>
         </tr>
 
         <tr>
             <td>Discount:</td>
-            <td><input type="number" th:field="*{discount}" /></td>
-            <td th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}">Discount Error</td>
+            <td><input th:field="*{discount}" type="number"/></td>
+            <td th:errors="*{discount}" th:if="${#fields.hasErrors('discount')}">Discount Error</td>
         </tr>
 
         <tr>
             <td>Category:</td>
-            <td><input type="category" th:field="*{category}" /></td>
-            <td th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</td>
+            <td><input th:field="*{category}" type="category"/></td>
+            <td th:errors="*{category}" th:if="${#fields.hasErrors('category')}">Category Error</td>
         </tr>
 
         <tr>
-            <td><button type="submit">Submit</button></td>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
         </tr>
     </table>
 

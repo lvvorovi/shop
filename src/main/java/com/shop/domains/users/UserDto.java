@@ -2,7 +2,6 @@ package com.shop.domains.users;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -13,10 +12,10 @@ public class UserDto extends RepresentationModel<UserDto> {
 
     private Long id;
     @NotNull
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 25)
     private String firstName;
     @NotNull
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 25)
     private String lastName;
     @NotNull
     @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")

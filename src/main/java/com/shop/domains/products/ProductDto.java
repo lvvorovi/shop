@@ -6,7 +6,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 public class ProductDto extends RepresentationModel<ProductDto> {
@@ -25,8 +25,8 @@ public class ProductDto extends RepresentationModel<ProductDto> {
     private BigDecimal discount;
     private String category;
     private BigDecimal actualPrice;
-    private Timestamp created;
-    private Timestamp updated;
+    private Date created;
+    private Date updated;
 
     public ProductDto() {
     }
@@ -95,19 +95,19 @@ public class ProductDto extends RepresentationModel<ProductDto> {
         this.actualPrice = actualPrice;
     }
 
-    public Timestamp getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public Timestamp getUpdated() {
+    public Date getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Timestamp updated) {
+    public void setUpdated(Date updated) {
         this.updated = updated;
     }
 

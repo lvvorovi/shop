@@ -1,7 +1,7 @@
 package com.shop.domains.users.userService;
 
-import com.shop.domains.users.UserEntity;
 import com.shop.domains.users.UserDto;
+import com.shop.domains.users.UserEntity;
 import com.shop.domains.users.UserRepository;
 import com.shop.domains.users.userMappers.UserMapper;
 import com.shop.domains.users.userService.validation.UserValidationService;
@@ -26,9 +26,9 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public UserDto save(UserDto dto) {
+    public void save(UserDto dto) {
         validationService.validate(dto);
-        return userMapper.toDto(userRepository.save(userMapper.toEntity(dto)));
+        userMapper.toDto(userRepository.save(userMapper.toEntity(dto)));
     }
 
     public List<UserDto> findAll() {
@@ -38,17 +38,13 @@ public class UserService {
         return dtoList;
     }
 
-/*    public UserDto update(UserDto dto) {
+    public void update(UserDto dto) {
         validationService.validate(dto);
-        UserEntity entity = userRepository.findById(dto.getId())
-                .orElseThrow(() -> new UserNotFoundException("User with id " + dto.getId() + " not found"));
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
-        entity.setEmail(dto.getEmail());
-        entity.setPassword(dto.getPassword());
-        entity.setPhone(dto.getPhone());
-        return userMapper.toDto(userRepository.(entity));
-    }*/
+        if (!existsById(dto.getId())) {
+            throw new UserNotFoundException("User with id " + dto.getId() + " not found");
+        }
+        userMapper.toDto(userRepository.save(userMapper.toEntity(dto)));
+    }
 
     public void delete(UserDto dto) {
         UserEntity entity = userRepository.findById(dto.getId())

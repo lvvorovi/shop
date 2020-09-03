@@ -1,4 +1,4 @@
-package com.shop.domains.beanMappers;
+package com.shop.core.beanMappers;
 
 
 import com.shop.domains.products.productMappers.ProductMapper;
@@ -11,12 +11,12 @@ public class BeanMapperService {
 
     private final UserMapper userMapper;
     private final ProductMapper productMapper;
-    private final UserItemMapper productListMapper;
+    private final UserItemMapper userItemMapper;
 
-    public BeanMapperService(UserMapper userMapper, ProductMapper productMapper, UserItemMapper productListMapper) {
+    public BeanMapperService(UserMapper userMapper, ProductMapper productMapper, UserItemMapper userItemMapper) {
         this.userMapper = userMapper;
         this.productMapper = productMapper;
-        this.productListMapper = productListMapper;
+        this.userItemMapper = userItemMapper;
     }
 
     public UserMapper getUserMapper() {
@@ -27,8 +27,8 @@ public class BeanMapperService {
         return productMapper;
     }
 
-    public UserItemMapper getProductListMapper() {
-        return productListMapper;
+    public UserItemMapper getUserItemMapper() {
+        return userItemMapper;
     }
 
 }

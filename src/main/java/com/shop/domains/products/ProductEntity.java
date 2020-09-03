@@ -2,10 +2,12 @@ package com.shop.domains.products;
 
 
 import com.shop.domains.userItems.UserItemEntity;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,9 +23,12 @@ public class ProductEntity {
     private BigDecimal discount;
     private String description;
     private String sku;
-    private Timestamp created;
-    private Timestamp updated;
     private String category;
+    @CreatedDate
+    @Column(updatable = false)
+    private Date created;
+    @LastModifiedDate
+    private Date updated;
 
     @OneToMany(mappedBy = "product")
     private Set<UserItemEntity> items;
@@ -79,22 +84,6 @@ public class ProductEntity {
         this.sku = sku;
     }
 
-    public Timestamp getCreated() {
-        return created;
-    }
-
-    public void setCreated(Timestamp created) {
-        this.created = created;
-    }
-
-    public Timestamp getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Timestamp updated) {
-        this.updated = updated;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -111,6 +100,22 @@ public class ProductEntity {
         this.items = items;
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,29 +127,14 @@ public class ProductEntity {
                 Objects.equals(discount, entity.discount) &&
                 Objects.equals(description, entity.description) &&
                 Objects.equals(sku, entity.sku) &&
+                Objects.equals(category, entity.category) &&
                 Objects.equals(created, entity.created) &&
                 Objects.equals(updated, entity.updated) &&
-                Objects.equals(category, entity.category) &&
                 Objects.equals(items, entity.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, discount, description, sku, created, updated, category, items);
-    }
-
-    @Override
-    public String toString() {
-        return "ProductEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", description='" + description + '\'' +
-                ", sku='" + sku + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", category='" + category + '\'' +
-                '}';
+        return Objects.hash(id, name, price, discount, description, sku, category, created, updated, items);
     }
 }

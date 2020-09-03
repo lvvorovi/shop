@@ -2,12 +2,10 @@ package com.shop.domains.products.productService;
 
 import com.shop.domains.products.ProductDto;
 import com.shop.domains.products.ProductEntity;
-import com.shop.domains.products.productMappers.ProductMapper;
 import com.shop.domains.products.ProductRepository;
-import com.shop.domains.products.productMappers.ProductPageMapper;
+import com.shop.domains.products.productMappers.ProductMapper;
 import com.shop.domains.products.productService.validation.ProductValidationService;
 import com.shop.domains.products.productService.validation.exceptions.ProductNotFoundException;
-import com.sun.istack.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,13 +18,11 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ProductValidationService productValidationService;
-    private final ProductPageMapper productPageMapper;
 
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper, ProductValidationService productValidationService, ProductPageMapper productPageMapper) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper, ProductValidationService productValidationService) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
         this.productValidationService = productValidationService;
-        this.productPageMapper = productPageMapper;
     }
 
     public ProductDto save(ProductDto dto) {
@@ -50,9 +46,11 @@ public class ProductService {
     }
 
 
-    public void delete(ProductDto dto) {
-        productValidationService.validate(dto);
-        productRepository.delete(productMapper.toEntity(dto));
+    public void delete(Long id) {
+        ProductEntity entity = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + " not found"));
+        productValidationService.validate(productMapper.toDto(entity));
+        productRepository.delete(entity);
     }
 
     public ProductDto update(ProductDto dto) {

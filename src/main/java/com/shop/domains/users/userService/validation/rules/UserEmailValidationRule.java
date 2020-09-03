@@ -37,7 +37,7 @@ public class UserEmailValidationRule implements UserValidationRules {
             throw new UserEmailException("Illegal email format. Missing email username before '@' symbol");
         }
         UserEntity entity = userRepository.findByEmail(dto.getEmail()).orElseGet(UserEntity::new);
-        if (entity.getId() != null && !entity.getEmail().equals(dto.getEmail())) {
+        if (entity.getId() != null && !entity.getId().equals(dto.getId())) {
             throw new UserEmailException("email already used by another user");
         }
     }
