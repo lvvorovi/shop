@@ -17,6 +17,11 @@ public class UserMapper {
         dto.setCreated(entity.getCreated());
         dto.setUpdated(entity.getUpdated());
         dto.setLastName(entity.getLastName());
+        dto.setEnabled(entity.getEnabled());
+        dto.setCredentialsNotExpired(entity.getCredentialsNotExpired());
+        dto.setAccountNonExpired(entity.getAccountNonExpired());
+        dto.setAccountNonLocked(entity.getAccountNonLocked());
+        dto.setRoles(entity.getRoles());
 
         return dto;
     }
@@ -31,6 +36,11 @@ public class UserMapper {
         entity.setUpdated(dto.getUpdated());
         entity.setCreated(dto.getCreated());
         entity.setLastName(dto.getLastName());
+        entity.setEnabled(dto.getEnabled());
+        entity.setCredentialsNotExpired(dto.getCredentialsNotExpired());
+        entity.setAccountNonLocked(dto.getAccountNonLocked());
+        entity.setAccountNonExpired(dto.getAccountNonExpired());
+        entity.setRoles(dto.getRoles());
 
         return entity;
     }

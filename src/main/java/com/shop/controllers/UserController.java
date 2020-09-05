@@ -30,6 +30,12 @@ public class UserController {
         return userService.findById(id);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{email}")
+    public UserDto findUserByEmail(@PathVariable String email) {
+        return userService.findByUsername(email);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void save(@Validated @RequestBody UserDto dto) {

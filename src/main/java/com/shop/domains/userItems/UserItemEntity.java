@@ -15,14 +15,6 @@ public class UserItemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    UserEntity user;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    ProductEntity product;
-
     @Column(name = "quantity")
     int quantity;
 
@@ -31,6 +23,14 @@ public class UserItemEntity {
 
     @Column(name = "updated")
     private Timestamp updated;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    ProductEntity product;
 
     public UserItemEntity() {
     }

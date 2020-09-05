@@ -18,6 +18,25 @@ CREATE TABLE users
     INDEX (name, email)
 );
 
+CREATE TABLE roles (
+    id TINYINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(20) NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE user_roles (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    role_id TINYINT NOT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (role_id) REFERENCES roles (id),
+    CONSTRAINT UNIQUE uc_user_roles (user_id, role_id),
+    INDEX (user_id)
+);
+
 CREATE TABLE products
 (
     id          BIGINT      NOT NULL AUTO_INCREMENT,
@@ -235,3 +254,18 @@ VALUES (6, 3, 4);
 INSERT INTO user_items (user_id, product_id, quantity)
 VALUES (8, 8, 5);
 
+INSERT INTO roles (name) VALUES ('ROLE_USER');
+INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
+
+INSERT INTO user_roles (user_id, role_id) VALUES (1,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (2,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (3,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (4,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (5,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (6,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (7,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (8,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (9,1);
+INSERT INTO user_roles (user_id, role_id) VALUES (11,2);
+
+ALTER TABLE users DROP COLUMN role;

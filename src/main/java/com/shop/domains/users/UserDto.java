@@ -1,12 +1,14 @@
 package com.shop.domains.users;
 
+import com.shop.domains.userRoles.UserRolesEntity;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 
 public class UserDto extends RepresentationModel<UserDto> {
 
@@ -17,15 +19,21 @@ public class UserDto extends RepresentationModel<UserDto> {
     @NotNull
     @Size(min = 2, max = 25)
     private String lastName;
-    @NotNull
-    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
+    @NotNull(message = "email should be valid")
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$", message = "email should fit global standards")
     private String email;
     @NotNull
     private String password;
     @Pattern(regexp = "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*$")
     private String phone;
-    private Timestamp created;
-    private Timestamp updated;
+    private Date created;
+    private Date updated;
+    private Boolean isEnabled;
+    private Boolean isCredentialsNotExpired;
+    private Boolean isAccountNonLocked;
+    private Boolean isAccountNonExpired;
+    private Set<UserRolesEntity> roles;
+
 
     public UserDto() {
     }
@@ -78,20 +86,52 @@ public class UserDto extends RepresentationModel<UserDto> {
         this.phone = phone;
     }
 
-    public Timestamp getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public Timestamp getUpdated() {
+    public Date getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Timestamp updated) {
+    public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public Boolean getCredentialsNotExpired() {
+        return isCredentialsNotExpired;
+    }
+
+    public void setCredentialsNotExpired(Boolean credentialsNotExpired) {
+        isCredentialsNotExpired = credentialsNotExpired;
+    }
+
+    public Boolean getAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public Boolean getAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
     }
 
     @Override
@@ -107,12 +147,16 @@ public class UserDto extends RepresentationModel<UserDto> {
                 Objects.equals(password, userDto.password) &&
                 Objects.equals(phone, userDto.phone) &&
                 Objects.equals(created, userDto.created) &&
-                Objects.equals(updated, userDto.updated);
+                Objects.equals(updated, userDto.updated) &&
+                Objects.equals(isEnabled, userDto.isEnabled) &&
+                Objects.equals(isCredentialsNotExpired, userDto.isCredentialsNotExpired) &&
+                Objects.equals(isAccountNonLocked, userDto.isAccountNonLocked) &&
+                Objects.equals(isAccountNonExpired, userDto.isAccountNonExpired);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, firstName, lastName, email, password, phone, created, updated);
+        return Objects.hash(super.hashCode(), id, firstName, lastName, email, password, phone, created, updated, isEnabled, isCredentialsNotExpired, isAccountNonLocked, isAccountNonExpired);
     }
 
     @Override
@@ -124,8 +168,20 @@ public class UserDto extends RepresentationModel<UserDto> {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", created='" + created + '\'' +
-                ", updated='" + updated + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", isEnabled=" + isEnabled +
+                ", isCredentialsNotExpired=" + isCredentialsNotExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isAccountNonExpired=" + isAccountNonExpired +
                 '}';
+    }
+
+    public Set<UserRolesEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRolesEntity> roles) {
+        this.roles = roles;
     }
 }

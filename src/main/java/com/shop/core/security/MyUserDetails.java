@@ -1,44 +1,53 @@
 package com.shop.core.security;
 
+import com.shop.domains.users.UserDto;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class MyUserDetails implements UserDetails {
 
+    UserDto userDto;
+
+    public MyUserDetails(UserDto userDto) {
+        this.userDto = userDto;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(userDto.getRoles().toString()));
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return userDto.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return userDto.getEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return userDto.getAccountNonExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return userDto.getAccountNonLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return userDto.getCredentialsNotExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return userDto.getEnabled();
     }
 }

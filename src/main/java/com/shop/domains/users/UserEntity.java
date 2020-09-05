@@ -1,9 +1,10 @@
 package com.shop.domains.users;
 
+import com.shop.domains.userRoles.UserRolesEntity;
 import com.shop.domains.userItems.UserItemEntity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,11 +20,22 @@ public class UserEntity {
     private String email;
     private String password;
     private String phone;
-    private Timestamp created;
-    private Timestamp updated;
+    private Date created;
+    private Date updated;
+    @Column(name = "enabled")
+    private Boolean isEnabled;
+    @Column(name = "credentials_not_expired")
+    private Boolean isCredentialsNotExpired;
+    @Column(name = "not_locked")
+    private Boolean isAccountNonLocked;
+    @Column(name = "not_expired")
+    private Boolean isAccountNonExpired;
 
     @OneToMany(mappedBy = "user")
     private Set<UserItemEntity> items;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<UserRolesEntity> roles;
 
     public UserEntity() {
     }
@@ -76,20 +88,52 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public Timestamp getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public Timestamp getUpdated() {
+    public Date getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Timestamp updated) {
+    public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public Boolean getCredentialsNotExpired() {
+        return isCredentialsNotExpired;
+    }
+
+    public void setCredentialsNotExpired(Boolean credentialsNotExpired) {
+        isCredentialsNotExpired = credentialsNotExpired;
+    }
+
+    public Boolean getAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public Boolean getAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
     }
 
     public Set<UserItemEntity> getItems() {
@@ -98,6 +142,14 @@ public class UserEntity {
 
     public void setItems(Set<UserItemEntity> items) {
         this.items = items;
+    }
+
+    public Set<UserRolesEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRolesEntity> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -112,12 +164,17 @@ public class UserEntity {
                 Objects.equals(password, that.password) &&
                 Objects.equals(phone, that.phone) &&
                 Objects.equals(created, that.created) &&
-                Objects.equals(updated, that.updated);
+                Objects.equals(updated, that.updated) &&
+                Objects.equals(isEnabled, that.isEnabled) &&
+                Objects.equals(isCredentialsNotExpired, that.isCredentialsNotExpired) &&
+                Objects.equals(isAccountNonLocked, that.isAccountNonLocked) &&
+                Objects.equals(isAccountNonExpired, that.isAccountNonExpired)
+                ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password, phone, created, updated);
+        return Objects.hash(id, firstName, lastName, email, password, phone, created, updated, isEnabled, isCredentialsNotExpired, isAccountNonLocked, isAccountNonExpired);
     }
 
     @Override
@@ -129,8 +186,12 @@ public class UserEntity {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", created='" + created + '\'' +
-                ", updated='" + updated + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", isEnabled=" + isEnabled +
+                ", isCredentialsNotExpired=" + isCredentialsNotExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isAccountNonExpired=" + isAccountNonExpired +
                 '}';
     }
 }
