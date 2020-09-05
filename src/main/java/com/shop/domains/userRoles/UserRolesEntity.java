@@ -20,7 +20,7 @@ public class UserRolesEntity {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    RoleEntity roles;
+    public RoleEntity roles;
 
     public UserRolesEntity() {
     }
