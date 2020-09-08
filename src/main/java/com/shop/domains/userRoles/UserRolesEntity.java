@@ -20,7 +20,7 @@ public class UserRolesEntity {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    public RoleEntity roles;
+    public RoleEntity role;
 
     public UserRolesEntity() {
     }
@@ -41,12 +41,12 @@ public class UserRolesEntity {
         this.user = user;
     }
 
-    public RoleEntity getRoles() {
-        return roles;
+    public RoleEntity getRole() {
+        return role;
     }
 
-    public void setRoles(RoleEntity roles) {
-        this.roles = roles;
+    public void setRole(RoleEntity role) {
+        this.role = role;
     }
 
     @Override
@@ -56,12 +56,12 @@ public class UserRolesEntity {
         UserRolesEntity userRoles = (UserRolesEntity) o;
         return id == userRoles.id &&
                 Objects.equals(user, userRoles.user) &&
-                Objects.equals(roles, userRoles.roles);
+                Objects.equals(role, userRoles.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, roles);
+        return Objects.hash(id, user, role);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UserRolesEntity {
         return "UserRoles{" +
                 "id=" + id +
                 ", user=" + user +
-                ", roles=" + roles +
+                ", roles=" + role +
                 '}';
     }
 }

@@ -19,7 +19,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new MyUserDetails(userService.findByUsername(username));
+    public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
+        return new MyUserDetails(userService.findByName(firstName));
     }
 }

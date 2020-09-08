@@ -45,7 +45,7 @@ public class UserService {
         UserEntity userEntity = userMapper.toEntity(dto);
 
         userMapper.toDto(userRepository.save(userEntity));
-        userRoleService.save(userEntity, roleService.findByName("ROLE_USER"));
+        userRoleService.save(userEntity, roleService.findByName("USER"));
 
     }
 
@@ -79,9 +79,14 @@ public class UserService {
         return userRepository.existsById(id);
     }
 
-    public UserDto findByUsername(String username) {
-        return userMapper.toDto(userRepository.findByEmail(username)
-                .orElseThrow(() -> new UserNotFoundException("User with email " + username + " not found")));
+    public UserDto findByName(String firstName) {
+        return userMapper.toDto(userRepository.findByFirstName(firstName)
+                .orElseThrow(() -> new UserNotFoundException("User with name " + firstName + " not found")));
+    }
+
+    public UserDto findByEmail(String email) {
+        return userMapper.toDto(userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User with name " + email + " not found")));
     }
 
 }

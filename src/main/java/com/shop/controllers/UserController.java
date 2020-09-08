@@ -33,7 +33,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{email}")
     public UserDto findUserByEmail(@PathVariable String email) {
-        return userService.findByUsername(email);
+        return userService.findByEmail(email);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -7,53 +7,70 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
 
-    UserDto userDto;
+    private final String username;
+    private final String password;
+    private final Boolean isEnabled;
+    private final Boolean isCredentialsNotExpired;
+    private final Boolean isAccountNonLocked;
+    private final Boolean isAccountNonExpired;
+    private final Collection<GrantedAuthority> authorities;
 
     public MyUserDetails(UserDto userDto) {
-        this.userDto = userDto;
+        this.username = userDto.getFirstName();
+        this.password = userDto.getPassword();
+        this.isEnabled = userDto.getEnabled();
+        this.isCredentialsNotExpired = userDto.getCredentialsNotExpired();
+        this.isAccountNonLocked = userDto.getAccountNonLocked();
+        this.isAccountNonExpired = userDto.getAccountNonExpired();
+
+        List<UserRolesEntity> entityList = new ArrayList<>(userDto.getRoles());
+        List<String> stringList = new ArrayList<>();
+        entityList.forEach(entity -> stringList.add(entity.getRole().getName()));
+        this.authorities = userDto.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRole().getName()))
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<UserRolesEntity> entity = userDto.getRoles();
-        ArrayList<UserRolesEntity> userRolesEntityArrayList = new ArrayList<>(entity);
-        String role = userRolesEntityArrayList.get(0).getRoles().getName();
-        return List.of(new SimpleGrantedAuthority(role));
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return userDto.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return userDto.getEmail();
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return userDto.getAccountNonExpired();
+        return isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return userDto.getAccountNonLocked();
+        return isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return userDto.getCredentialsNotExpired();
+        return isCredentialsNotExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return userDto.getEnabled();
+        return isEnabled;
     }
 }

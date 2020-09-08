@@ -15,7 +15,7 @@ public class RoleEntity {
     Byte id;
     String name;
 
-    @OneToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     private Set<UserRolesEntity> roles;
 
     public RoleEntity() {
