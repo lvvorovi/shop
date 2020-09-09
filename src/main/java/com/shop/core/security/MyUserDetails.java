@@ -23,7 +23,7 @@ public class MyUserDetails implements UserDetails {
     private final Collection<GrantedAuthority> authorities;
 
     public MyUserDetails(UserDto userDto) {
-        this.username = userDto.getFirstName();
+        this.username = userDto.getEmail();
         this.password = userDto.getPassword();
         this.isEnabled = userDto.getEnabled();
         this.isCredentialsNotExpired = userDto.getCredentialsNotExpired();

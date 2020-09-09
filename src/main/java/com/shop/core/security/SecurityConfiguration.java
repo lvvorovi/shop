@@ -1,21 +1,26 @@
 package com.shop.core.security;
 
+import com.shop.core.security.filters.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    MyUserDetailService myUserDetailService;
+    private final MyUserDetailService myUserDetailService;
+    private final JwtRequestFilter jwtRequestFilter;
 
-    public SecurityConfiguration(MyUserDetailService myUserDetailService) {
+    public SecurityConfiguration(MyUserDetailService myUserDetailService, JwtRequestFilter jwtRequestFilter) {
         this.myUserDetailService = myUserDetailService;
+        this.jwtRequestFilter = jwtRequestFilter;
     }
 
     @Override
@@ -25,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+/*        http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/products").hasRole("ADMIN")
@@ -39,9 +44,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/items").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/items").hasAnyRole("USER", "ADMIN")
 
-                .and().formLogin();
+                .and().formLogin();*/
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/authenticate").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
 
-
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean

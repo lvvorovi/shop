@@ -22,6 +22,7 @@ public class UserDto extends RepresentationModel<UserDto> {
     @NotNull(message = "email should be valid")
     @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$", message = "email should fit global standards")
     private String email;
+    private String userName;
     @NotNull
     private String password;
     @Pattern(regexp = "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*$")
@@ -183,5 +184,13 @@ public class UserDto extends RepresentationModel<UserDto> {
 
     public void setRoles(Set<UserRolesEntity> roles) {
         this.roles = roles;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

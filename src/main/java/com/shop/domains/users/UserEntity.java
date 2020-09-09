@@ -18,6 +18,7 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private String email;
+    private String username;
     private String password;
     private String phone;
     private Date created;
@@ -193,5 +194,13 @@ public class UserEntity {
                 ", isAccountNonLocked=" + isAccountNonLocked +
                 ", isAccountNonExpired=" + isAccountNonExpired +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

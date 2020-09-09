@@ -22,6 +22,7 @@ public class UserMapper {
         dto.setAccountNonExpired(entity.getAccountNonExpired());
         dto.setAccountNonLocked(entity.getAccountNonLocked());
         dto.setRoles(entity.getRoles());
+        dto.setUserName(entity.getUsername());
 
         return dto;
     }
@@ -41,6 +42,7 @@ public class UserMapper {
         entity.setAccountNonLocked(dto.getAccountNonLocked());
         entity.setAccountNonExpired(dto.getAccountNonExpired());
         entity.setRoles(dto.getRoles());
+        entity.setUsername(dto.getUserName());
 
         return entity;
     }

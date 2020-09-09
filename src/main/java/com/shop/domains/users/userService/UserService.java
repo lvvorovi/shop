@@ -41,6 +41,7 @@ public class UserService {
         dto.setAccountNonExpired(true);
         dto.setCredentialsNotExpired(true);
         dto.setEnabled(true);
+        dto.setUserName(dto.getEmail());
 
         UserEntity userEntity = userMapper.toEntity(dto);
 
@@ -77,11 +78,6 @@ public class UserService {
 
     public Boolean existsById(Long id) {
         return userRepository.existsById(id);
-    }
-
-    public UserDto findByName(String firstName) {
-        return userMapper.toDto(userRepository.findByFirstName(firstName)
-                .orElseThrow(() -> new UserNotFoundException("User with name " + firstName + " not found")));
     }
 
     public UserDto findByEmail(String email) {

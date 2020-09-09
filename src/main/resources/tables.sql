@@ -269,3 +269,5 @@ INSERT INTO user_roles (user_id, role_id) VALUES (9,1);
 INSERT INTO user_roles (user_id, role_id) VALUES (11,2);
 
 ALTER TABLE users DROP COLUMN role;
+
+ALTER TABLE users ADD COLUMN username VARCHAR(20) NOT NULL;
