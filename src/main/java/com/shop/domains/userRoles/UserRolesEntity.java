@@ -1,11 +1,16 @@
 package com.shop.domains.userRoles;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.shop.domains.role.RoleEntity;
 import com.shop.domains.users.UserEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "user_roles")
 public class UserRolesEntity {
@@ -55,21 +60,19 @@ public class UserRolesEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserRolesEntity userRoles = (UserRolesEntity) o;
         return id == userRoles.id &&
-                Objects.equals(user, userRoles.user) &&
-                Objects.equals(role, userRoles.role);
+                role.getName().equals(userRoles.getRole().getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, role);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "UserRoles{" +
                 "id=" + id +
-                ", user=" + user +
-                ", roles=" + role +
+                ", roles=" + role.getName() +
                 '}';
     }
 }

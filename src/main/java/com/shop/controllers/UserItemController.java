@@ -1,5 +1,6 @@
 package com.shop.controllers;
 
+import com.shop.domains.authentication.JwtUtil;
 import com.shop.domains.userItems.UserItemDto;
 import com.shop.domains.userItems.userItemService.UserItemService;
 import org.springframework.data.domain.Page;
@@ -7,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -16,9 +19,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class UserItemController {
 
     private final UserItemService userItemService;
+    private final JwtUtil jwtUtil;
 
-    public UserItemController(UserItemService userItemService) {
+    public UserItemController(UserItemService userItemService, JwtUtil jwtUtil) {
         this.userItemService = userItemService;
+        this.jwtUtil = jwtUtil;
     }
 
 
@@ -37,9 +42,10 @@ public class UserItemController {
     }*/
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{id}")
-    public Page<UserItemDto> getAllByUserId(@PathVariable Long id, @RequestBody Pageable pageable) {
-        Page<UserItemDto> dtoPage = userItemService.findAllByUserId(id, pageable);
+    @GetMapping()
+    public Page<UserItemDto> getAllByUserId(HttpServletRequest request, Pageable pageable) {
+        //TODO evaluate whether request comes from the same user as authorized token
+        Page<UserItemDto> dtoPage = userItemService.findAllByUserId(pageable, request);
 
         for (UserItemDto userItem : dtoPage) {
             Link linkToProductDto = linkTo(methodOn(ProductController.class)

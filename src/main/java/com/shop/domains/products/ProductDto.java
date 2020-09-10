@@ -124,14 +124,12 @@ public class ProductDto extends RepresentationModel<ProductDto> {
                 Objects.equals(sku, dto.sku) &&
                 Objects.equals(discount, dto.discount) &&
                 Objects.equals(category, dto.category) &&
-                Objects.equals(actualPrice, dto.actualPrice) &&
-                Objects.equals(created, dto.created) &&
-                Objects.equals(updated, dto.updated);
+                Objects.equals(actualPrice, dto.actualPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name, price, description, sku, discount, category, actualPrice, created, updated);
+        return Objects.hash(super.hashCode(), id, name, price, description, sku, discount, category, actualPrice);
     }
 
     @Override
@@ -145,8 +143,6 @@ public class ProductDto extends RepresentationModel<ProductDto> {
                 ", discount=" + discount +
                 ", category='" + category + '\'' +
                 ", actualPrice=" + actualPrice +
-                ", created=" + created +
-                ", updated=" + updated +
                 '}';
     }
 }

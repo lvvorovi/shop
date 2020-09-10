@@ -20,7 +20,7 @@ public class ProductController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping()
-    public Page<ProductDto> finalAllPaged(Pageable pageable) {
+    public Page<ProductDto> findAllPaged(Pageable pageable) {
         return productService.findAllPagedAndSorted(pageable);
     }
 

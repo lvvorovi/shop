@@ -1,13 +1,20 @@
 package com.shop.domains.users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.shop.domains.userRoles.UserRolesEntity;
 import com.shop.domains.userItems.UserItemEntity;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -163,19 +170,20 @@ public class UserEntity {
                 Objects.equals(lastName, that.lastName) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(password, that.password) &&
-                Objects.equals(phone, that.phone) &&
-                Objects.equals(created, that.created) &&
-                Objects.equals(updated, that.updated) &&
-                Objects.equals(isEnabled, that.isEnabled) &&
-                Objects.equals(isCredentialsNotExpired, that.isCredentialsNotExpired) &&
-                Objects.equals(isAccountNonLocked, that.isAccountNonLocked) &&
-                Objects.equals(isAccountNonExpired, that.isAccountNonExpired)
+                Objects.equals(phone, that.phone)
                 ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password, phone, created, updated, isEnabled, isCredentialsNotExpired, isAccountNonLocked, isAccountNonExpired);
+        return Objects.hash(
+                id,
+                firstName,
+                lastName,
+                email,
+                password,
+                phone
+        );
     }
 
     @Override
@@ -187,12 +195,6 @@ public class UserEntity {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", isEnabled=" + isEnabled +
-                ", isCredentialsNotExpired=" + isCredentialsNotExpired +
-                ", isAccountNonLocked=" + isAccountNonLocked +
-                ", isAccountNonExpired=" + isAccountNonExpired +
                 '}';
     }
 

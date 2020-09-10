@@ -1,6 +1,7 @@
 package com.shop.domains.userItems.userItemService;
 
 import com.shop.core.beanMappers.BeanMapperService;
+import com.shop.domains.authentication.JwtUtil;
 import com.shop.domains.products.productService.ProductService;
 import com.shop.domains.userItems.UserItemDto;
 import com.shop.domains.userItems.UserItemEntity;
@@ -8,13 +9,16 @@ import com.shop.domains.userItems.UserItemRepository;
 import com.shop.domains.userItems.userItemService.validation.UserItemValidationService;
 import com.shop.domains.userItems.userItemService.validation.exceptions.UserItemAlreadyExistsException;
 import com.shop.domains.userItems.userItemService.validation.exceptions.UserItemNotFoundException;
-import com.shop.domains.users.UserDto;
 import com.shop.domains.users.UserEntity;
 import com.shop.domains.users.userService.UserService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,17 +29,19 @@ public class UserItemService {
     private final BeanMapperService beanMappers;
     private final UserService userService;
     private final ProductService productService;
+    private final JwtUtil jwtUtil;
 
     public UserItemService(UserItemRepository userItemRepository,
                            UserItemValidationService userItemValidationService,
                            BeanMapperService beanMappers,
                            UserService userService,
-                           ProductService productService) {
+                           ProductService productService, JwtUtil jwtUtil) {
         this.userItemRepository = userItemRepository;
         this.userItemValidationService = userItemValidationService;
         this.beanMappers = beanMappers;
         this.productService = productService;
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
 /*
@@ -74,13 +80,17 @@ public class UserItemService {
         userItemRepository.save(entity);
     }
 
-    public Page<UserItemDto> findAllByUserId(Long userId, Pageable pageable) {
-        UserDto userDto = userService.findById(userId);
-        UserEntity userEntity = beanMappers.getUserMapper().toEntity(userDto);
+    public Page<UserItemDto> findAllByUserId(Pageable pageable, HttpServletRequest request) {
+//        UserDto userDto = userService.findById(userId);
+//        UserEntity userEntity = beanMappers.getUserMapper().toEntity(userDto);
+        UserEntity userEntity = getUserFromRequest(request);
+
         Page<UserItemEntity> entityPage = userItemRepository.findAllByUser(userEntity, pageable);
-        return (Page<UserItemDto>) entityPage.stream()
+        List<UserItemDto> dtoList = entityPage.stream()
                 .map(beanMappers.getUserItemMapper()::toDto)
                 .collect(Collectors.toList());
+
+        return new PageImpl<>(dtoList);
     }
 
     public void delete(Long id) {
@@ -94,5 +104,20 @@ public class UserItemService {
 /*    public void deleteAll(Long userId) {
         userItemRepository.deleteAll(userId);
     }*/
+
+    private UserEntity getUserFromRequest(HttpServletRequest request) {
+        final String authorizationHeader = request.getHeader("Authorization");
+
+        String username = null;
+        String jwt = null;
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            jwt = authorizationHeader.substring(7);
+            username = jwtUtil.extractUserName(jwt);
+        }
+
+        return beanMappers.getUserMapper().toEntity(userService.findByEmail(username));
+
+    }
 
 }

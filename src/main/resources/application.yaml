@@ -12,3 +12,9 @@ spring:
   data:
     rest:
       default-media-type: application/json
+
+
+
+my:
+  secretkey: "secretkey"
+  salt: "!/]}{ā"

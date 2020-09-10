@@ -1,6 +1,8 @@
 package com.shop.domains.products;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.shop.domains.userItems.UserItemEntity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,6 +13,9 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "products")
 public class ProductEntity {
@@ -127,14 +132,11 @@ public class ProductEntity {
                 Objects.equals(discount, entity.discount) &&
                 Objects.equals(description, entity.description) &&
                 Objects.equals(sku, entity.sku) &&
-                Objects.equals(category, entity.category) &&
-                Objects.equals(created, entity.created) &&
-                Objects.equals(updated, entity.updated) &&
-                Objects.equals(items, entity.items);
+                Objects.equals(category, entity.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, discount, description, sku, category, created, updated, items);
+        return Objects.hash(id, name, price, discount, description, sku, category);
     }
 }

@@ -146,18 +146,12 @@ public class UserDto extends RepresentationModel<UserDto> {
                 Objects.equals(lastName, userDto.lastName) &&
                 Objects.equals(email, userDto.email) &&
                 Objects.equals(password, userDto.password) &&
-                Objects.equals(phone, userDto.phone) &&
-                Objects.equals(created, userDto.created) &&
-                Objects.equals(updated, userDto.updated) &&
-                Objects.equals(isEnabled, userDto.isEnabled) &&
-                Objects.equals(isCredentialsNotExpired, userDto.isCredentialsNotExpired) &&
-                Objects.equals(isAccountNonLocked, userDto.isAccountNonLocked) &&
-                Objects.equals(isAccountNonExpired, userDto.isAccountNonExpired);
+                Objects.equals(phone, userDto.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, firstName, lastName, email, password, phone, created, updated, isEnabled, isCredentialsNotExpired, isAccountNonLocked, isAccountNonExpired);
+        return Objects.hash(super.hashCode(), id, firstName, lastName, email, password, phone);
     }
 
     @Override
@@ -169,12 +163,6 @@ public class UserDto extends RepresentationModel<UserDto> {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", isEnabled=" + isEnabled +
-                ", isCredentialsNotExpired=" + isCredentialsNotExpired +
-                ", isAccountNonLocked=" + isAccountNonLocked +
-                ", isAccountNonExpired=" + isAccountNonExpired +
                 '}';
     }
 

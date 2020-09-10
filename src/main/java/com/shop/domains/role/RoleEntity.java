@@ -1,11 +1,16 @@
 package com.shop.domains.role;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.shop.domains.userRoles.UserRolesEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "roles")
 public class RoleEntity {

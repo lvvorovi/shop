@@ -1,12 +1,20 @@
 package com.shop.domains.userItems;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.shop.domains.products.ProductEntity;
 import com.shop.domains.users.UserEntity;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "user_items")
 public class UserItemEntity {
@@ -90,26 +98,22 @@ public class UserItemEntity {
         UserItemEntity that = (UserItemEntity) o;
         return quantity == that.quantity &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(product, that.product) &&
-                Objects.equals(created, that.created) &&
-                Objects.equals(updated, that.updated);
+                Objects.equals(user.getId(), that.user.getId()) &&
+                Objects.equals(product.getId(), that.product.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, product, quantity, created, updated);
+        return Objects.hash(id, user.getId(), product.getId(), quantity);
     }
 
     @Override
     public String toString() {
         return "UserItemEntity{" +
                 "id=" + id +
-                ", user=" + user +
-                ", product=" + product +
+                ", user_id =" + user.getId() +
+                ", product_id =" + product.getId() +
                 ", quantity=" + quantity +
-                ", created='" + created + '\'' +
-                ", updated='" + updated + '\'' +
                 '}';
     }
 }

@@ -12,6 +12,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler
     protected ResponseEntity<ErrorDto> handle(Exception ex) {
+        ex.printStackTrace();
         if (ex instanceof MethodArgumentNotValidException) {
             String message = ((MethodArgumentNotValidException) ex).getBindingResult()
                     .getFieldErrors().stream()

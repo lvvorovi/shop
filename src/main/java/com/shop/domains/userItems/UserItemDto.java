@@ -91,14 +91,12 @@ public class UserItemDto extends RepresentationModel<UserItemDto> {
                 Objects.equals(id, that.id) &&
                 Objects.equals(user, that.user) &&
                 Objects.equals(product, that.product) &&
-                Objects.equals(created, that.created) &&
-                Objects.equals(updated, that.updated) &&
                 Objects.equals(totalPrice, that.totalPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, product, quantity, created, updated, totalPrice);
+        return Objects.hash(id, user, product, quantity, totalPrice);
     }
 
     @Override
@@ -108,8 +106,6 @@ public class UserItemDto extends RepresentationModel<UserItemDto> {
                 ", user=" + user +
                 ", product=" + product +
                 ", quantity=" + quantity +
-                ", created='" + created + '\'' +
-                ", updated='" + updated + '\'' +
                 ", totalPrice=" + totalPrice +
                 '}';
     }
