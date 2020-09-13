@@ -13,6 +13,16 @@ spring:
     rest:
       default-media-type: application/json
 
+logging:
+  file:
+    name: logger.log
+    clean-history-on-start: false
+  level:
+    root: warn
+    com:
+      shop: trace
+
+
 
 
 my:

@@ -271,3 +271,5 @@ INSERT INTO user_roles (user_id, role_id) VALUES (11,2);
 ALTER TABLE users DROP COLUMN role;
 
 ALTER TABLE users ADD COLUMN username VARCHAR(20) NOT NULL;
+
+ALTER TABLE users MODIFY COLUMN password VARCHAR(70) NOT NULL;

@@ -15,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/users/me/items")
 public class UserItemController {
 
     private final UserItemService userItemService;
@@ -58,20 +58,20 @@ public class UserItemController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void addToBasket(@RequestBody UserItemDto dto) {
-        userItemService.save(dto);
+    public void addToBasket(@RequestBody UserItemDto dto, HttpServletRequest request) {
+        userItemService.save(dto, request);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping
-    public void updateInBasket(@RequestBody UserItemDto dto) {
-        userItemService.update(dto);
+    public void updateInBasket(@RequestBody UserItemDto dto, HttpServletRequest request) {
+        userItemService.update(dto, request);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping
-    public void deleteFromBasket(Long id) {
-        userItemService.delete(id);
+    public void deleteFromBasket(Long id, HttpServletRequest request) {
+        userItemService.delete(id, request);
     }
 
 }

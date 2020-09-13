@@ -2,7 +2,9 @@ package com.shop.controllers;
 
 import com.shop.domains.users.UserDto;
 import com.shop.domains.users.userService.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +41,8 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void save(@Validated @RequestBody UserDto dto) {
+        String encodedPass = new BCryptPasswordEncoder(12).encode(dto.getPassword());
+        dto.setPassword(encodedPass);
         userService.save(dto);
     }
 

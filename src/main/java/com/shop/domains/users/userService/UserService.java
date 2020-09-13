@@ -8,6 +8,7 @@ import com.shop.domains.users.UserRepository;
 import com.shop.domains.users.userMappers.UserMapper;
 import com.shop.domains.users.userService.validation.UserValidationService;
 import com.shop.domains.users.userService.validation.exceptions.UserNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,7 +37,6 @@ public class UserService {
 
     public void save(UserDto dto) {
         validationService.validate(dto);
-
         dto.setAccountNonLocked(true);
         dto.setAccountNonExpired(true);
         dto.setCredentialsNotExpired(true);

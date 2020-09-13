@@ -9,6 +9,7 @@ import com.shop.domains.userItems.UserItemRepository;
 import com.shop.domains.userItems.userItemService.validation.UserItemValidationService;
 import com.shop.domains.userItems.userItemService.validation.exceptions.UserItemAlreadyExistsException;
 import com.shop.domains.userItems.userItemService.validation.exceptions.UserItemNotFoundException;
+import com.shop.domains.userItems.userItemService.validation.exceptions.UserItemUserException;
 import com.shop.domains.users.UserEntity;
 import com.shop.domains.users.userService.UserService;
 import org.springframework.data.domain.Page;
@@ -57,7 +58,12 @@ public class UserItemService {
 */
 // TODO divide save from update
 
-    public void save(UserItemDto dto) {
+    public void save(UserItemDto dto, HttpServletRequest request) {
+        if (!getUserFromRequest(request)
+                .equals(beanMappers.getUserMapper().toEntity(dto.getUser()))) {
+            throw new UserItemUserException("Basket you were trying to access belongs to another user");
+        }
+
         userItemValidationService.validate(dto);
         UserItemEntity entity = beanMappers.getUserItemMapper().toEntity(dto);
 
@@ -68,7 +74,13 @@ public class UserItemService {
         userItemRepository.save(entity);
     }
 
-    public void update(UserItemDto dto) {
+    public void update(UserItemDto dto, HttpServletRequest request) {
+
+        if (!getUserFromRequest(request)
+                .equals(beanMappers.getUserMapper().toEntity(dto.getUser()))) {
+            throw new UserItemUserException("Basket you were trying to access belongs to another user");
+        }
+
         userItemValidationService.validate(dto);
         UserItemEntity entity = beanMappers.getUserItemMapper().toEntity(dto);
 
@@ -93,11 +105,15 @@ public class UserItemService {
         return new PageImpl<>(dtoList);
     }
 
-    public void delete(Long id) {
-        if (userItemRepository.findById(id).isEmpty()) {
-            throw new UserItemNotFoundException("Product with id "
-                    + id + " not in the basket");
+    public void delete(Long id, HttpServletRequest request) {
+        UserItemEntity entity = userItemRepository.findById(id)
+                .orElseThrow(() -> new UserItemNotFoundException("Product with id "
+                        + id + " not in the basket"));
+        if (!getUserFromRequest(request)
+                .equals(entity.getUser())) {
+            throw new UserItemUserException("Basket you were trying to access belongs to another user");
         }
+
         userItemRepository.deleteById(id);
     }
 
