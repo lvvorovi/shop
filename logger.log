@@ -1,0 +1,36 @@
+2020-09-13 21:35:28.791  INFO 13748 --- [main] com.shop.ShopApplication                 : Starting ShopApplication on SEL5CG726658V with PID 13748 (C:\Users\lvvorovi\Google Drive\Eclipse\shop\build\classes\java\main started by lvvorovi in C:\Users\lvvorovi\Google Drive\Eclipse\shop)
+2020-09-13 21:35:28.796 DEBUG 13748 --- [main] com.shop.ShopApplication                 : Running with Spring Boot v2.3.2.RELEASE, Spring v5.2.8.RELEASE
+2020-09-13 21:35:28.797  INFO 13748 --- [main] com.shop.ShopApplication                 : No active profile set, falling back to default profiles: default
+2020-09-13 21:35:32.196 DEBUG 13748 --- [main] c.s.c.security.filters.JwtRequestFilter  : Filter 'jwtRequestFilter' configured for use
+2020-09-13 21:35:32.624  WARN 13748 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-13 21:35:36.865  INFO 13748 --- [main] com.shop.ShopApplication                 : Started ShopApplication in 8.922 seconds (JVM running for 10.137)
+2020-09-13 21:49:45.807  INFO 17828 --- [main] com.shop.ShopApplication                 : Starting ShopApplication on SEL5CG726658V with PID 17828 (C:\Users\lvvorovi\Google Drive\Eclipse\shop\build\classes\java\main started by lvvorovi in C:\Users\lvvorovi\Google Drive\Eclipse\shop)
+2020-09-13 21:49:45.812 DEBUG 17828 --- [main] com.shop.ShopApplication                 : Running with Spring Boot v2.3.2.RELEASE, Spring v5.2.8.RELEASE
+2020-09-13 21:49:45.817  INFO 17828 --- [main] com.shop.ShopApplication                 : No active profile set, falling back to default profiles: default
+2020-09-13 21:49:50.111 DEBUG 17828 --- [main] c.s.c.security.filters.JwtRequestFilter  : Filter 'jwtRequestFilter' configured for use
+2020-09-13 21:49:50.538  WARN 17828 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-13 21:49:54.351  INFO 17828 --- [main] com.shop.ShopApplication                 : Started ShopApplication in 9.408 seconds (JVM running for 14.805)
+2020-09-13 21:50:50.900  INFO 17828 --- [http-nio-8080-exec-2] c.s.c.AuthenticationController           : Authentification controller entered
+2020-09-13 21:50:50.902  INFO 17828 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication method entered
+2020-09-13 21:50:50.903  INFO 17828 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication started
+2020-09-13 21:50:52.514  INFO 17828 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication ended
+2020-09-13 21:50:52.515  INFO 17828 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication passed, creating token
+2020-09-13 21:50:52.595  INFO 17828 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : token created
+2020-09-13 21:52:33.442  INFO 14784 --- [main] com.shop.ShopApplication                 : Starting ShopApplication on SEL5CG726658V with PID 14784 (C:\Users\lvvorovi\Google Drive\Eclipse\shop\build\classes\java\main started by lvvorovi in C:\Users\lvvorovi\Google Drive\Eclipse\shop)
+2020-09-13 21:52:33.448 DEBUG 14784 --- [main] com.shop.ShopApplication                 : Running with Spring Boot v2.3.2.RELEASE, Spring v5.2.8.RELEASE
+2020-09-13 21:52:33.449  INFO 14784 --- [main] com.shop.ShopApplication                 : No active profile set, falling back to default profiles: default
+2020-09-13 21:52:36.888 DEBUG 14784 --- [main] c.s.c.security.filters.JwtRequestFilter  : Filter 'jwtRequestFilter' configured for use
+2020-09-13 21:52:37.199  WARN 14784 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-13 21:52:40.435  INFO 14784 --- [main] com.shop.ShopApplication                 : Started ShopApplication in 7.824 seconds (JVM running for 9.047)
+2020-09-13 21:53:20.376  INFO 24316 --- [main] com.shop.ShopApplication                 : Starting ShopApplication on SEL5CG726658V with PID 24316 (C:\Users\lvvorovi\Google Drive\Eclipse\shop\build\classes\java\main started by lvvorovi in C:\Users\lvvorovi\Google Drive\Eclipse\shop)
+2020-09-13 21:53:20.381 DEBUG 24316 --- [main] com.shop.ShopApplication                 : Running with Spring Boot v2.3.2.RELEASE, Spring v5.2.8.RELEASE
+2020-09-13 21:53:20.382  INFO 24316 --- [main] com.shop.ShopApplication                 : No active profile set, falling back to default profiles: default
+2020-09-13 21:53:22.958 DEBUG 24316 --- [main] c.s.c.security.filters.JwtRequestFilter  : Filter 'jwtRequestFilter' configured for use
+2020-09-13 21:53:23.363  WARN 24316 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-13 21:53:27.638  INFO 24316 --- [main] com.shop.ShopApplication                 : Started ShopApplication in 8.096 seconds (JVM running for 9.409)
+2020-09-13 21:53:42.960  INFO 24316 --- [http-nio-8080-exec-2] c.s.c.AuthenticationController           : Authentification controller entered
+2020-09-13 21:53:42.961  INFO 24316 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication method entered
+2020-09-13 21:53:42.961  INFO 24316 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication started
+2020-09-13 21:53:44.295  INFO 24316 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication ended
+2020-09-13 21:53:44.296  INFO 24316 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : authentication passed, creating token
+2020-09-13 21:53:44.355  INFO 24316 --- [http-nio-8080-exec-2] c.s.d.a.AuthenticationService            : token created
